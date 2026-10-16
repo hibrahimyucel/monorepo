@@ -1,0 +1,59 @@
+name: Build and Deploy Documentation Site
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/docs/**'
+      - 'packages/**'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy-documentation:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Source Fetching
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Initialize pnpm Engine Environment
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Bootstrap Node Execution Frameworks
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Monorepo Clean Dependency Resolving
+        run: pnpm install --frozen-lockfile
+
+      - name: Fire Monorepo High-Velocity Build Flow
+        run: pnpm build
+
+      - name: Target Asset Provisioning Strategy
+        uses: actions/configure-pages@v4
+
+      - name: Package Bundle Assets for GitHub Environment Target
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/docs/.vitepress/dist
+
+      - name: Execute Live Edge Deployment Pipelines
+        id: deployment
+        uses: actions/deploy-pages@v4
