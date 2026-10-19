@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "SaaS Operations Hub",
   description: "Production Technical Manual",
-  base: "/monorepo/", // Matches the structural GitHub Pages mirror pathing
+  base: "/my-saas-monorepo/", // Matches the structural GitHub Pages mirror pathing
   themeConfig: {
     logo: 'https://turbo.build',
     nav: [
