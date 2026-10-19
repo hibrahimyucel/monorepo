@@ -3,12 +3,13 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "SaaS Operations Hub",
   description: "Production Technical Manual",
-  base: "/my-saas-monorepo/", // Matches the structural GitHub Pages mirror pathing
+  base: "/my-saas-monorepo/",
   themeConfig: {
     logo: 'https://turbo.build',
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'System Guidebook', link: '/alignment' }
+      { text: 'Manual Home', link: '/' },
+      { text: 'System Guidebook', link: '/alignment' },
+      { text: 'Lexicon Database', link: '/glossary/' }
     ],
     sidebar: [
       {
@@ -16,6 +17,14 @@ export default defineConfig({
         items: [
           { text: 'Workspace Architecture Map', link: '/alignment' },
           { text: 'AlmaLinux Environment Ops', link: '/environment' }
+        ]
+      },
+      {
+        text: 'Academic Terminology Lexicon',
+        items: [
+          { text: 'Glossary Index Catalog', link: '/glossary/' },
+          { text: 'Term: AlmaLinux OS', link: '/glossary/almalinux' },
+          { text: 'Term: VitePress Static Framework', link: '/glossary/vitepress' }
         ]
       }
     ],
