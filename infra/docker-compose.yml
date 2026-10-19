@@ -1,24 +1,24 @@
 version: '3.8'
 
 services:
-  # Upstream API Execution Sandbox
   api-upstream:
     image: node:20-alpine
     container_name: saas_api_backend
+    restart: always # Tells AlmaLinux to boot this container if Docker starts
     working_dir: /app
     volumes:
       - ../:/app
-    command: sh -c "npm install -g pnpm && pnpm install --frozen-lockfile && pnpm --filter @saas/api build && pnpm --filter @saas/api start"
+    command: sh -c "corepack enable && pnpm install --frozen-lockfile && pnpm --filter @saas/api build && pnpm --filter @saas/api start"
     environment:
       - PORT=5000
       - NODE_ENV=production
     ports:
       - "5000:5000"
 
-  # Frontline Reverse Proxy Engine (Serves static builds & handles API mapping)
   reverse-proxy:
     image: nginx:alpine
     container_name: saas_edge_router
+    restart: always # Ensures the web traffic router automatically recovers on reboot
     ports:
       - "80:80"
     volumes:

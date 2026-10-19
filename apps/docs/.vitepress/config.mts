@@ -1,21 +1,30 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: "SaaS Core Docs",
-  description: "Monorepo Documentation Engine",
-  base: "/my-saas-monorepo/", // Customized baseline mapping targeting Github Pages paths
+  title: "SaaS Operations Hub",
+  description: "Production Technical Manual",
+  base: "/my-saas-monorepo/", // Matches the structural GitHub Pages mirror pathing
   themeConfig: {
+    logo: 'https://turbo.build',
     nav: [
-      { text: 'Home Base', link: '/' },
-      { text: 'Guidebook', link: '/guide' }
+      { text: 'Home', link: '/' },
+      { text: 'System Guidebook', link: '/alignment' }
     ],
     sidebar: [
       {
-        text: 'Core Blueprint Documentation',
+        text: 'Core Infrastructure Blueprint',
         items: [
-          { text: 'Quick Initialization Guide', link: '/guide' }
+          { text: 'Workspace Architecture Map', link: '/alignment' },
+          { text: 'AlmaLinux Environment Ops', link: '/environment' }
         ]
       }
-    ]
+    ],
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com' }
+    ],
+    footer: {
+      message: 'Released under the MIT Workspace License.',
+      copyright: 'Copyright © 2026-present Operations Team'
+    }
   }
 })

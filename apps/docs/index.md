@@ -2,14 +2,22 @@
 layout: home
 
 hero:
-  name: "SaaS Blueprint Architecture"
-  text: "Production-ready AlmaLinux Monorepo Pipeline Documentation"
-  tagline: "Driven by Vitepress, Turbo, Express, and Docker Nginx Reverse Proxy"
+  name: "SaaS Workspace Manual"
+  text: "Production System Playbook"
+  tagline: "High-velocity pnpm, Vite, Express & Docker deployment architecture mapped natively on AlmaLinux OS."
   actions:
     - theme: brand
-      text: Dive Into Guidebook
-      link: /guide
+      text: Explore Architecture Map
+      link: /alignment
     - theme: alt
-      text: GitHub Blueprint Repo
-      link: https://github.com
+      text: View System Commands
+      link: /environment
+
+features:
+  - title: Monorepo Orchestration
+    details: Managed smoothly by Turborepo tasks and pnpm workspace symlinks to share logic securely across apps.
+  - title: Resilient Production Mesh
+    details: Fully containerized runtime environments running Express backends and Nginx gateways with robust failure recovery.
+  - title: Continuous Integration
+    details: Git hook automation compiling markdown documents directly into remote edge cloud endpoints via GitHub Pages.
 ---
