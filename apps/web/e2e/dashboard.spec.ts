@@ -33,5 +33,26 @@ test('should render the dashboard header correctly', async ({ page }) => {
     const streamingBadge = page.locator('text=Streaming');
     await expect(streamingBadge).toBeVisible();
   });
+  
+  
+  // apps/web/e2e/dashboard.spec.ts dosyasına eklenebilir
+
+test('should trigger rate limiting (429) under heavy load', async ({ request }) => {
+  // Saniyede 5r/s limitimiz var, arka arkaya 15 istek göndererek limiti patlatıyoruz
+  let hitLimit = false;
+
+  for (let i = 0; i < 15; i++) {
+    const response = await request.get('/api/telemetry/snapshot');
+    if (response.status() === 429) {
+      hitLimit = true;
+      break;
+    }
+  }
+
+  // Nginx koruma kalkanının başarıyla devreye girdiğini doğrula!
+  expect(hitLimit).toBe(true);
+});
+
+  
 });
 
