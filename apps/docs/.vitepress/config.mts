@@ -20,7 +20,8 @@ export default defineConfig({
         text: 'Core Infrastructure Blueprint',
         items: [
           { text: 'Workspace Architecture Map', link: '/alignment' },
-          { text: 'AlmaLinux Environment Ops', link: '/environment' }
+          { text: 'AlmaLinux Environment Ops', link: '/environment' },
+          { text: 'Rate limiing', link: '/telemetry-spec' }
         ]
       },
       {
