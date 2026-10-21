@@ -6,13 +6,22 @@
     <title>SaaS Dashboard</title>
   </head>
   <body>
-    <div id="app">
-      <h1>SaaS Platform Control Panel</h1>
-      <div id="metric-card-target"></div>
-      <div id="btn-target"></div>
-      <h3>Live API Stream Data:</h3>
-      <pre id="api-stream">Loading framework metrics...</pre>
+<!-- apps/web/index.html (Örnek Tasarım Çatısı) -->
+<div class="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-indigo-950 to-black text-slate-100 p-8">
+  <header class="max-w-7xl mx-auto mb-12 flex justify-between items-center border-b border-slate-800 pb-6">
+    <div>
+      <h1 class="text-2xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-indigo-400">
+        SaaS Core Telemetry Panel
+      </h1>
+      <p class="text-sm text-slate-400 mt-1">Git Tag Status: <code class="text-indigo-400">checkpoint-v7.2</code></p>
     </div>
+    <div id="connection-badge"></div>
+  </header>
+
+  <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6" id="dashboard-grid">
+    <!-- UI paketinden gelen dinamik kartlar buraya basılacak -->
+  </main>
+</div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
