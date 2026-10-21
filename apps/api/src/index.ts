@@ -1,18 +1,29 @@
 // apps/api/src/index.ts
 import express from 'express';
 import telemetryRouter from './routes/telemetry.js';
+import { logger } from './utils/logger.js'; // ESM uyumlu import
 
 const app = express();
 const PORT: number = parseInt(process.env.PORT || '5000', 10);
 
-// Nginx proxy başlıklarına (X-Real-IP) güven
 app.set('trust proxy', true);
+
+// Gelen her HTTP isteğini loglayan inline middleware
+app.use((req, res, next) => {
+  const clientIp = req.headers['x-real-ip'] || req.socket.remoteAddress;
+  logger.info({
+    method: req.method,
+    url: req.url,
+    ip: clientIp,
+    userAgent: req.headers['user-agent']
+  }, `Inbound request received`);
+  next();
+});
 
 // Rotaları eşleştir
 app.use('/telemetry', telemetryRouter);
 
-// KRİTİK DÜZELTME: '0.0.0.0' ekleyerek Docker içi ağ trafiğine izin veriyoruz
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Telemetry API Microservice running on port ${PORT}`);
+  logger.info(`Telemetry API Microservice successfully started on port ${PORT}`);
 });
 

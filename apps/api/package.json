@@ -8,14 +8,17 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
+    "@saas/ui": "workspace:*",
     "cors": "^2.8.5",
     "express": "^4.19.0",
-    "@saas/ui": "workspace:*"
+    "pino": "^10.4.0"
   },
   "devDependencies": {
+    "@saas/config": "workspace:*",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@saas/config": "workspace:*",
+    "@types/node": "^26.6.5",
+    "pino-roll": "^4.0.0",
     "typescript": "^5.0.0"
   }
 }

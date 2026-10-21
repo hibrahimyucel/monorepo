@@ -25,5 +25,6 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ../apps/web/dist:/usr/share/nginx/html/web:ro
       - ../apps/docs/.vitepress/dist:/usr/share/nginx/html/docs:ro
+      - ./logs:/app/infra/logs # Canlı log klasör köprüsü
     depends_on:
       - api-upstream
