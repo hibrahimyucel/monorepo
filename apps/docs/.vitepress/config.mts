@@ -21,7 +21,7 @@ export default defineConfig({
         items: [
           { text: 'Workspace Architecture Map', link: '/alignment' },
           { text: 'AlmaLinux Environment Ops', link: '/environment' },
-          { text: 'Rate limiing', link: '/telemetry-spec' }
+          { text: 'Rate limiing', link: '/telemetry-spec'  }
         ]
       },
       {
