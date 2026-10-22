@@ -32,19 +32,20 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
-      # 🟢 KRİTİK ADIM 1: Sadece dokümantasyon projesini ve onun bağımlılıklarını kur
+      # 1. Bağımlılıkları Kur (apps/docs ve onun yerel bağımlılıkları olan packages/ui vb.)
       - name: Install dependencies
-        run: pnpm install --filter docs... --no-frozen-lockfile
+        run: pnpm install --filter ./apps/docs... --no-frozen-lockfile
 
-      # 🟢 KRİTİK ADIM 2: Sadece dokümantasyon projesini derle
+      # 2. Sadece VitePress dokümantasyonunu derle
       - name: Build with VitePress
-        run: pnpm --filter docs run build
+        run: pnpm --filter ./apps/docs run build
 
+      # 3. Gerçek çıktı klasörünü GitHub Pages'e yükle
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Derlenen statik dosyaların çıktığı yer (genelde .vitepress/dist olur)
-          path: docs/.vitepress/dist 
+          path: apps/docs/.vitepress/dist # 🟢 Tam klasör yolu güncellendi
+
 
   deploy:
     environment:
