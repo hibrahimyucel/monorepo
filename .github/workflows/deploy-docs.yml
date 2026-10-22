@@ -1,8 +1,9 @@
-name: Build and Deploy Documentation Site
+name: Deploy VitePress site to Pages
+
 on:
   push:
-    branches: [main]
-  workflow_dispatch: # GitHub arayüzünden el ile başlatma butonu ekler
+    branches: [main] # veya master
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,26 +15,48 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy-documentation:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          version: 9
-      - uses: actions/setup-node@v4
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9 # Yerelde kullandığınız pnpm ana versiyonu (örn: 9 veya 10)
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
-      - run: pnpm install --filter docs... --no-frozen-lockfile
-      - run: pnpm build
-      - uses: actions/configure-pages@v4
-      - uses: actions/upload-pages-artifact@v3
+
+      # 🟢 KRİTİK ADIM 1: Sadece dokümantasyon projesini ve onun bağımlılıklarını kur
+      - name: Install dependencies
+        run: pnpm install --filter docs... --no-frozen-lockfile
+
+      # 🟢 KRİTİK ADIM 2: Sadece dokümantasyon projesini derle
+      - name: Build with VitePress
+        run: pnpm --filter docs run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: apps/docs/.vitepress/dist
-      - id: deployment
+          # Derlenen statik dosyaların çıktığı yer (genelde .vitepress/dist olur)
+          path: docs/.vitepress/dist 
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
 
