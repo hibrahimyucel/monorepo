@@ -1,6 +1,7 @@
 // apps/api/src/index.ts
 import express from 'express';
-import telemetryRouter from './routes/telemetry.js';
+import telemetryRouter from './routes/telemetry.js'; // Ensure the .js suffix is present
+// ... rest of express server setup remains unchanged
 import { logger } from './utils/logger.js'; // ESM uyumlu import
 
 const app = express();
